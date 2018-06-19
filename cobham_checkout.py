@@ -12,7 +12,8 @@ def convert_np(pd_):
 	return pd_c
 
 #directories
-dir_ = 'C:/Users/Owner/My SecuriSync/MastCAM/REVB_Testing/Data/16356-0006/'
+#dir_ = 'C:/Users/Owner/My SecuriSync/MastCAM/REVB_Testing/Data/16356-0006/'
+dir_ = 'C:/Users/trandhawa/My SecuriSync/MastCAM/REVB_Testing/Data/16358-0009/test/'
 
 #filenames
 os.chdir(dir_)
@@ -26,7 +27,7 @@ cw_ = ['cw','ccw']
 sn_ = ['0002, 0004, 0005, 0006']
 
 #model listing
-model_ = ['16356']
+model_ = ['16358']
 
 #import excel as panda object
 test_files_ = os.listdir(dir_)
@@ -38,6 +39,8 @@ for file in test_files_:
 
         filename_ = file
         files_.append(file)
+        
+        print (filename_)
         
         dyno_data = pd.read_csv(dir_ + '/' + filename_, sep='\t')
         
@@ -73,36 +76,39 @@ for file in test_files_:
                 
         ax1.set_xlabel('time (sec)')
         ax1.set_ylabel('position (deg)', color = 'tab:blue')
-        ax1.plot(u_time_, u_ang2_, color = 'tab:blue')
+        ax1.scatter(u_time_, u_ang2_, color = 'tab:blue')
         ax1.tick_params(axis='y', labelcolor='tab:blue')
         
         ax2 = ax1.twinx()
         
         ax2.set_ylabel('torque (in-oz)', color='tab:red')
-        ax2.plot(u_time_, u_torq_, color='tab:red')
+        ax2.scatter(u_time_, u_torq_, color='tab:red')
         ax2.tick_params(axis='y', labelcolor='tab:red')
         
         fig.tight_layout()
-        plt.savefig(filename_ + '.png', dpi=600)
+#        plt.savefig(filename_ + '.png', dpi=600)
         plt.show()
         
-#        torq_ = convert_np(u_torq_)
-#        time_ = convert_np(u_time_)
-#           
-#        delta_ = 50
-#        slope_ = []
-#           
-#        for i in range(len(time_) - delta_):
-#            slope_.append((torq_[i] - torq_[i+delta_])/(time_[i] - time_[i+delta_]))
+        torq_ = convert_np(u_torq_)
+        ang2_ = convert_np(u_ang2_)
+        time_ = convert_np(u_time_)
            
-        #generate slopes of angle2 (i.e. speed)
-#        plt.figure()
-#        plt.title('Velocity' + ' ' + filename_)
-#        plt.ylabel('velocity (deg/s)')
-#        plt.xlabel('time (sec)')
-#        plt.scatter(time_[:(len(time_) - delta_)], slope_)
-#        plt.grid(True, which='major')
-#        plt.show()
+        delta_ = 200
+        slope_ = []
+           
+        for i in range(len(time_) - delta_):
+            slope_.append((ang2_[i] - ang2_[i+delta_])/(time_[i] - time_[i+delta_]))
+           
+        velocity_ = np.asarray(slope_)
+        
+#        generate slopes of angle2 (i.e. speed)
+        plt.figure()
+        plt.title('Velocity' + ' ' + filename_)
+        plt.ylabel('velocity (deg/s)')
+        plt.xlabel('time (sec)')
+        plt.scatter(time_[:(len(time_) - delta_)], slope_)
+        plt.grid(True, which='major')
+        plt.show()
     
     else:
         not_files.append(file)
