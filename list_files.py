@@ -16,7 +16,7 @@ sn_ = np.asarray([])
 #test_ = ['peak','preload']
 #speed_ = ['60','100','150']
 
-dir_ = 'C:/Users/trandhawa/My SecuriSync/MastCAM/REVB_Testing/Data/'
+dir_ = 'C:/Users/Owner/My SecuriSync/MastCAM/REVB_Testing/Data/16358-0009/'
 
 motor_dirs_ = os.listdir(dir_)
 
