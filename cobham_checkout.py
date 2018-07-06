@@ -14,9 +14,9 @@ def convert_np(pd_):
 
 #directories
 
-#dir_ = 'C:/Users/Owner/My SecuriSync/MastCAM/REVB_Testing/Data/16356-0006/'
+dir_ = 'C:/Users/Owner/My SecuriSync/MastCAM/REVB_Testing/Data/'
 #dir_ = 'C:/Users/trandhawa/My SecuriSync/MastCAM/REVB_Testing/Data/'
-dir_ =  'P:/MSSS/1041_Mastcam-Z_Flight_Development/04_Test/Cobham_Motor_Checkout/REVB_Testing/Data/'
+#dir_ =  'P:/MSSS/1041_Mastcam-Z_Flight_Development/04_Test/Cobham_Motor_Checkout/REVB_Testing/Data/'
 #dir_ = 'C:/Users/trandhawa/My SecuriSync/MastCAM/REVB_Testing/Data/16358-0009/test/'
 
 
